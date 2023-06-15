@@ -1,4 +1,3 @@
-
 # Text Editor PWA
 ## Description
 Text Editor is a PWA to create notes or code snippets with or without an internet connection.
