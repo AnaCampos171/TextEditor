@@ -37,4 +37,5 @@ Copyright (c) 2023
 ## Link to Github repo: 
 https://github.com/AnaCampos171/TextEditor
 
-## Link to deployed project
+## Link to deployed project:
+https://arcane-plains-59149-d09d1aa71925.herokuapp.com/
