@@ -15,23 +15,17 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
-      // HtmlWebpackPlugin configuration
       new HtmlWebpackPlugin({
-        template: './src/index.html',
-        filename: 'index.html',
-        chunks: ['main'],
+        template: './index.html',
+        title: "Editor"
+   
       }),
-      new HtmlWebpackPlugin({
-        template: './src/install.html',
-        filename: 'install.html',
-        chunks: ['install'],
-      }),
-
-      // WebpackPwaManifest configuration
       new WebpackPwaManifest({
-        name: 'Editor App',
+        fingerprints: false,
+        inject:true,
+        name: 'My Text Editor App',
         short_name: 'App',
-        description: 'My Progressive Web App Text Editor',
+        description: 'My Progressive Web App',
         background_color: '#ffffff',
         icons: [
           {
@@ -41,8 +35,6 @@ module.exports = () => {
           },
         ],
       }),
-
-      // InjectManifest configuration for Workbox
       new InjectManifest({
         swSrc: './src-sw',
         swDest: 'src-sw.js',
@@ -53,20 +45,18 @@ module.exports = () => {
       rules: [
         // CSS loaders rule
         {
-          test: /\.css$/i,
+          test: /\.css$/,
           use: ['style-loader', 'css-loader'],
         },
 
         // Babel loader rule
         {
-          test: /\.m?js$/,
-          exclude: /node_modules/i,
+          test: /\.js$/,
+          exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
-              plugins: ['@babel/plugin-proposal-object-rest-spread',
-            '@babel/transform-runtime']
             },
           },
         },
