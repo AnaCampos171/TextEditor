@@ -1,14 +1,17 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
-const { InjectManifest } = require('workbox-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 module.exports = () => {
   return {
     mode: 'development',
+    devServer:{
+      open:true,
+    },
     entry: {
       main: './src/js/index.js',
-      install: './src/js/install.js'
+      install: './src/js/install.js',
     },
     output: {
       filename: '[name].bundle.js',
@@ -17,12 +20,11 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         template: './index.html',
-        title: "Editor"
-   
+        title: 'Editor',
       }),
       new WebpackPwaManifest({
         fingerprints: false,
-        inject:true,
+        inject: true,
         name: 'My Text Editor App',
         short_name: 'App',
         description: 'My Progressive Web App',
@@ -35,9 +37,10 @@ module.exports = () => {
           },
         ],
       }),
-      new InjectManifest({
-        swSrc: './src-sw',
-        swDest: 'src-sw.js',
+      new GenerateSW({
+        swDest: 'service-worker.js',
+        skipWaiting: true,
+        clientsClaim: true,
       }),
     ],
 
@@ -64,3 +67,4 @@ module.exports = () => {
     },
   };
 };
+
